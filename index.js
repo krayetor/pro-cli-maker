@@ -25,7 +25,7 @@ const htmlTemplate = `<!DOCTYPE html>
     <meta charset="UTF-8"
     <meta name="name="veiwport" content="width=device-width, initial-scale=1.0">
     <title>${projectName}</title>
-    <link rel="stylesheet" href="style/css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Welcome to ${projectName}!</h1>
