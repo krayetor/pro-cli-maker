@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 // index.js
+const { execSync } = require('child_process'); // For running shell commands like git init
+const { warn } = require('console');
 const fs = require('fs');
 const path = require('path');
 
@@ -16,6 +18,18 @@ const questions = [
             else return 'Project name may only include letters, numbers, underscores and hypens.';
         }
     },
+    {
+        type: 'confirm', // Yes/No question
+        name: 'initializeGit',
+        message: 'Initilize a git repository',
+        default: false // Default answer is NO
+    },
+    {
+        type: 'confirm',
+        name: 'addGitignore',
+        message: 'Add a .gitignore file?',
+        default: true // Default answer is Yes
+    }
 ];
 
 // --- Ask  the question (using dynamic import) ---
@@ -32,8 +46,8 @@ async function run() {
 
         console.log(`Starting to create your new project called: ${projectName}`);
 
-        
-        // ---  Templates   ---
+
+        // --->  Templates   <---
         const htmlTemplate = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,13 +76,40 @@ body {
 console.log("Hello fom ${projectName}!");`;
 
 
-        // ---  Script Logic ---
+        // --->  Script Logic <---
         fs.mkdirSync(projectName);
 
         // 2. Create the files *inside* the new folder
         fs.writeFileSync(path.join(projectName, 'index.html'), htmlTemplate);
         fs.writeFileSync(path.join(projectName, 'style.css'), cssTemplate);
         fs.writeFileSync(path.join(projectName, 'script.js'), jsTemplate);
+
+        // ---> Create the .gitignore file <---
+        if (answers.addGitignore) {
+            const gitignoreTemplate = `# Ignore nodes_modules
+nodes_modules
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+`;
+
+            fs.writeFileSync(path.join(projectName, '.gitignore'), gitignoreTemplate);
+            console.log('Added .gitignore file.');
+        }
+
+        //  ---> Initialize Git <---
+        if (answers.initializeGit) {
+            try {
+                execSync('git init', { cwd: projectName, stdio: 'ignore' });
+                console.log('Initialized Git Repository.');
+            } catch (gitErr) {
+                console.warn('Could not initialize Git. Is Git installed and in your PATH?');
+            }
+        }
 
         // 3. Log a final success message
         console.log('Success! Your project is ready.');
