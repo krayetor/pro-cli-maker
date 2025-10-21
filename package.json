@@ -17,5 +17,8 @@
     "web project"
   ],
   "author": "krayetor hellokrayetor@gmail.com",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^12.10.0"
+  }
 }
