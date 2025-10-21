@@ -1,0 +1,21 @@
+{
+  "name": "@krayetor/project-cli-maker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "create-project": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "automation",
+    "scaffold",
+    "generator",
+    "web project"
+  ],
+  "author": "krayetor hellokrayetor@gmail.com",
+  "license": "ISC"
+}
