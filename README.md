@@ -1,6 +1,6 @@
 # Project CLI Maker 
 
-A simple command-line tool to quickly scaffold a new web project. It creates a new folder and populates it with `index.html`, `style.css` and `script.js`.
+A simple command-line tool to quickly scaffold a new web project. It creates a new folder and populates it with `.gitignore file`,`index.html`, `style.css` and `script.js`.
 
 ## Usage
 
@@ -26,6 +26,7 @@ This will create the following folder structure:
 
 ```bash
 my-new-wwebite/
+├── .gitignore
 ├── index.html
 ├── style.css
 └── script.js
